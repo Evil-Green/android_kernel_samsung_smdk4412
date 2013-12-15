@@ -92,13 +92,13 @@ mali_runtime_resume_table mali_runtime_resume = {266, 875000, 1};
 /* dvfs table */
 mali_dvfs_table mali_dvfs[MALI_DVFS_STEPS]={
 #if defined(CONFIG_CPU_EXYNOS4212) || defined(CONFIG_CPU_EXYNOS4412)
-			/* step 0 */{160  ,1000000	,875000	, 0   , 70},
-			/* step 1 */{266  ,1000000	,900000	,62   , 90},
+			/* step 0 */{160  ,1000000	,875000	, 0   , 65},
+			/* step 1 */{266  ,1000000	,900000	,57   , 90},
 			/* step 2 */{350  ,1000000	,950000	,85   , 90},
-			/* step 3 */{440  ,1000000	,1025000   ,85   , 90},
-			/* step 4 */{533  ,1000000	,1075000   ,95   ,100} };
+			/* step 3 */{440  ,1000000	,1025000   ,85   , 98},
+			/* step 4 */{533  ,1000000	,1075000   ,94   ,100} };
 #else
-			/* step 0 */{134  ,1000000	, 950000   ,85   , 90},
+			/* step 0 */{134  ,1000000	, 950000   ,65   , 90},
 			/* step 1 */{267  ,1000000	,1050000   ,85   ,100} };
 #endif
 
@@ -1258,7 +1258,7 @@ int mali_dvfs_bottom_lock_pop(void)
 	if (prev_status <= 0) {
 		MALI_PRINT(("gpu bottom lock status is not valid for pop\n"));
 		return -1;
-	} else if (prev_status == 1) {
+	} else if (prev_status >= 1) {
 		bottom_lock_step = 0;
 		MALI_PRINT(("gpu bottom lock release\n"));
 	}
