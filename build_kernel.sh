@@ -38,13 +38,13 @@ if [ "${1}" != "" ];then
   export KERNELDIR=`readlink -f ${1}`
 fi
 
-TOOLCHAIN="/home/lonas/android/omni/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin/arm-eabi-"
-TOOLCHAIN_PATCH="/home/lonas/android/omni/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7/bin"
+TOOLCHAIN="/home/lonas/android/omni/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.7/bin/arm-linux-androideabi-"
+TOOLCHAIN_PATCH="/home/lonas/android/omni/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.7/bin"
 ROOTFS_PATH="/home/lonas/Kernel_Lonas/android_kernel_samsung_smdk4412/ramdisk"
 RAMFS_TMP="/home/lonas/Kernel_Lonas/tmp/ramfs-source-sgs3"
 
 CONFIG_LOCALVERSION="Lonas_CM-0.1"
-export KBUILD_BUILD_VERSION="1"
+export KBUILD_BUILD_VERSION="4"
 
 echo "ramfs_tmp = $RAMFS_TMP"
 
@@ -95,7 +95,7 @@ echo "#################### Generar boot.img ####################"
 find . -name "boot.img"
 mkdir -p $KERNELDIR/ramdisk/lib/modules
 find -name '*.ko' -exec cp -av {} $KERNELDIR/ramdisk/lib/modules/ \;
-$TOOLCHAIN_PATCH/arm-eabi-strip --strip-unneeded $KERNELDIR/ramdisk/lib/modules/*.ko
+$TOOLCHAIN_PATCH/arm-linux-androideabi-strip --strip-unneeded $KERNELDIR/ramdisk/lib/modules/*.ko
 find . -name "*.ko"
 
 echo "#################### Preparando flasheables ####################"
