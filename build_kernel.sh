@@ -44,7 +44,7 @@ ROOTFS_PATH="/home/lonas/Kernel_Lonas/android_kernel_samsung_smdk4412/ramdisk"
 RAMFS_TMP="/home/lonas/Kernel_Lonas/tmp/ramfs-source-sgs3"
 
 CONFIG_LOCALVERSION="Lonas_CM-0.1"
-export KBUILD_BUILD_VERSION="6"
+export KBUILD_BUILD_VERSION="7"
 
 echo "ramfs_tmp = $RAMFS_TMP"
 
