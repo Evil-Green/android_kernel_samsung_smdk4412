@@ -17,6 +17,9 @@ if [ ! -f /system/bin/busybox ]; then
 /sbin/busybox ln -s /sbin/busybox /system/bin/pkill
 fi
 
+# Iniciar Zram
+/res/ext/zram.sh
+
 # Limpiador de otros kernel
 /res/ext/limpiador.sh
 
