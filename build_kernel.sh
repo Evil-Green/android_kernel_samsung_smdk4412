@@ -59,6 +59,10 @@ make lonas_defconfig
 
 make -j`grep 'processor' /proc/cpuinfo | wc -l` ARCH=arm CROSS_COMPILE=$TOOLCHAIN || exit -1
 
+mkdir -p $KERNELDIR/ramdisk/lib/modules
+find -name '*.ko' -exec cp -av {} $KERNELDIR/ramdisk/lib/modules/ \;
+$TOOLCHAIN_PATCH/arm-linux-androideabi-strip --strip-unneeded $KERNELDIR/ramdisk/lib/modules/*.ko
+
 echo "#################### Build Ramdisk ####################"
 rm -f $KERNELDIR/releasetools/tar/$CONFIG_LOCALVERSION-$KBUILD_BUILD_VERSION.tar
 rm -f $KERNELDIR/releasetools/zip/$CONFIG_LOCALVERSION-$KBUILD_BUILD_VERSION.zip
@@ -91,12 +95,6 @@ nice -n 10 make -j4 ARCH=arm CROSS_COMPILE=$TOOLCHAIN zImage || exit 1
 
 echo "#################### Generar boot.img ####################"
 ./mkbootimg --kernel zImage --ramdisk $RAMFS_TMP.cpio.xz --board smdk4x12 --base 0x10000000 --pagesize 2048 --ramdiskaddr 0x11000000 -o $KERNELDIR/boot.img
-
-find . -name "boot.img"
-mkdir -p $KERNELDIR/ramdisk/lib/modules
-find -name '*.ko' -exec cp -av {} $KERNELDIR/ramdisk/lib/modules/ \;
-$TOOLCHAIN_PATCH/arm-linux-androideabi-strip --strip-unneeded $KERNELDIR/ramdisk/lib/modules/*.ko
-find . -name "*.ko"
 
 echo "#################### Preparando flasheables ####################"
 
