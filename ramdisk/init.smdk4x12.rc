@@ -525,3 +525,9 @@ service bootsnd /system/bin/tinyplay /system/etc/sound/silence.wav -D 0 -d 0 -p 
     user root
     group audio
     oneshot
+
+# Runtime Compcache
+service rtccd /sbin/rtccd2 -a 100M
+    class core
+    user root
+    oneshot
