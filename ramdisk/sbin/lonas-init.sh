@@ -17,9 +17,6 @@ if [ ! -f /system/bin/busybox ]; then
 /sbin/busybox ln -s /sbin/busybox /system/bin/pkill
 fi
 
-# Iniciar Zram
-/res/ext/zram.sh
-
 # Limpiador de otros kernel
 /res/ext/limpiador.sh
 
@@ -35,6 +32,9 @@ fi
 # Iniciar Tweaks Lonas_KL
 /res/ext/tweaks.sh
 /res/ext/tweaks_build.sh
+
+# Iniciar Zram
+/res/ext/zram.sh
 
 /sbin/busybox mount -t rootfs -o remount,ro rootfs
 /sbin/busybox mount -o remount,ro /system
